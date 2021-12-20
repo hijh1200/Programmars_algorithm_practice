@@ -1,9 +1,0 @@
-package Programmars_algorithm_practice;
-
-public class test {
-
-	public static void main(String[] args) {
-		System.out.println("DDD");
-	}
-
-}
