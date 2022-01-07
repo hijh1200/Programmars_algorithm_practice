@@ -1,24 +1,35 @@
 package Programmars_algorithm_practice.Level_2;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class decimals {
+	static HashSet<Integer> numberSet = new HashSet<Integer>();
+	
 	public static int solution(String numbers) {
-		int cnt = 0;
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		ArrayList<Integer> nums = new ArrayList<Integer>();
+		re("", numbers);
 		
-		for(int i=0; i<numbers.length(); i++) {
-				list.add(Integer.parseInt(numbers.substring(i, i+1)));
-		}
+		int count = 0; 
+		Iterator<Integer> it = numberSet.iterator(); 
+		while (it.hasNext()) { 
+			int number = it.next(); 
+			if (isPrime(number)) count++; 
+			}
 		
-		
-		
-		
-		System.out.println(list);
-		
-		return cnt;
+		return count;
 	}
+	
+	public static void re(String comb, String others) {
+		if(!comb.equals("")) {
+			numberSet.add(Integer.parseInt(comb));
+		}
+		for(int i=0; i<others.length(); i++) {
+			re(comb + others.charAt(i), 
+					others.substring(0, i) + others.substring(i+1, others.length()));
+		}
+	}
+	
 	public static boolean isPrime(int num) {
 		if(num == 2) return false;
 		for(int i=2; i<=Math.sqrt(num); i++) {
