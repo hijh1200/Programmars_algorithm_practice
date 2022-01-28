@@ -1,21 +1,32 @@
 package Programmars_algorithm_practice.Level_2;
 
+import java.util.Arrays;
+
 public class target_number {
-	static int answer = 0;
-	public static void dfs(int[] numbers, int target, int index, int sum) {
-		if(index == numbers.length) {
-			if(sum == target) answer++;
-			return;
+	public static int cnt;
+	public static void dfs(boolean[] visited, int[] numbers, int target, int idx) {
+		if(idx == visited.length) {
+			int sum = 0;
+			for(int i=0; i<visited.length; i++) {
+				if(visited[i]) sum += numbers[i] * -1;
+				else sum += numbers[i];
+			}
+			if(sum == target) cnt++;
 		}
-		sum = sum + numbers[index];
-		dfs(numbers, target, index+1, sum);
-		sum = sum - numbers[index] * 2;
-		dfs(numbers, target, index+1, sum);
+		else {
+			visited[idx] = false;
+			dfs(visited, numbers, target, idx+1);
+			
+			visited[idx] = true;
+			dfs(visited, numbers, target, idx+1);
+		}
 	}
 	
 	public static int solution(int[] numbers, int target) {
-		dfs(numbers, target, 0, 0);
-		return answer;
+		cnt = 0;
+		boolean[] visited = new boolean[numbers.length];
+		dfs(visited, numbers, target, 0);
+		return cnt;
 	}
 	public static void main(String[] args) {
 		int[] numbers = {1, 1, 1, 1, 1};
