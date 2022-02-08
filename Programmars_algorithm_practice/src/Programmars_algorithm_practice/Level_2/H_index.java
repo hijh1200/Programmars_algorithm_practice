@@ -14,7 +14,6 @@ public class H_index {
 			}
 		}
 		
-		System.out.println(Arrays.toString(temp));
         return h;
 	}
 
