@@ -25,7 +25,7 @@ public class delivery {
         	int[] current = pq.poll();
         	
         	for(int i=2; i<N+1; i++) {
-        		if(Integer.MAX_VALUE != map[i][current[1]]) {
+        		if(map[current[1]][i] != Integer.MAX_VALUE) {
         			if(dist[i] > current[0] + map[current[1]][i]) {
         				dist[i] = current[0] + map[current[1]][i];
         				pq.add(new int[] {dist[i], i});
