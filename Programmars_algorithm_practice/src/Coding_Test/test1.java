@@ -1,49 +1,25 @@
 package Coding_Test;
-import java.util.*;
-public class test1 {
 
-	public static int solution(int[][] customer) {
-		Arrays.sort(customer, new Comparator<int[]>() { 
-			@Override public int compare(int[] o1, int[] o2) { 
-				if(o1[0] == o2[0]) { 
-					return o1[1] - o2[1]; 
-					}else { 
-						return o1[0] - o2[0]; 
-						} 
-				} 
-			}
-		);
-		int diff = 0;
-		int start = customer[0][0];
-		int max = customer[0][1];
-		for(int i=0; i<customer.length-1; i++) {
-			if(max >= customer[i+1][0]) {
-				if(max >= customer[i+1][1]) {
-					continue;
-				}
-				else {
-					max = customer[i+1][1];
-				}
-			}
-			else {
-				diff = diff + (customer[i+1][0] - max);
-				max = customer[i+1][1];
-			}
+import java.util.PriorityQueue;
+
+public class test1 {
+	public static int solution(int[] t, int m) {
+		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		for(int i: t) pq.add(i);
+		
+		int res = 0;
+		
+		// 전차의 수가 가장 작은 m개의 기지 추출 
+		for(int i=0; i<m; i++) {
+			res += pq.poll();
 		}
-		System.out.println(diff);
-		System.out.println(Arrays.toString(customer[0]));
 		
-		
-		return (max - start) - diff;
-	}
-	
+        return res + m;
+    }
+
 	public static void main(String[] args) {
-		int[][] customer = {
-				{1,4},
-				{3,5},
-				{8,10}
-				};
-		System.out.println(solution(customer));
+		int[] t = {1,100,100,100,100,100};
+		System.out.println(solution(t, 1));
 	}
 
 }
